@@ -5,7 +5,7 @@ import css from './badge.scss';
 const NAME = 'badge';
 
 @Element('m-' + NAME)
-export class MasterBadgeElement extends MasterElement {
+export class BadgeElement extends MasterElement {
     static override css = css;
     template = new Template(() => [
         'slot'

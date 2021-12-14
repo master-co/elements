@@ -1,11 +1,11 @@
 import { Element } from '@master/element';
-import { MasterClickableElement } from '../../shared/clickable';
+import { ClickableElement } from '../shared/clickable';
 import css from './button.scss';
 
 const NAME = 'button';
 
 @Element('m-' + NAME)
-export class MasterButtonElement extends MasterClickableElement {
+export class ButtonElement extends ClickableElement {
 
     static override css = css;
 

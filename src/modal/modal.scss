@@ -1,9 +1,6 @@
-@import '../../variables';
-@import '../../mixins';
-
 :host {
-    --p: var(--modal-p, #{$md});
-    --r: var(--modal-r, #{$sm});
+    --p: var(--modal-p, 1.25rem);
+    --r: var(--modal-r, 0.625rem);
     --max-width: var(--modal-max-width, var(--wrap-xs));
     --max-height: var(--modal-max-height, 100%);
     --width: var(--modal-width, 100%);
@@ -164,11 +161,5 @@
     [part=close] {
         right: .5rem;
         left: auto;
-    }
-}
-
-@include below(sm) {
-    :host {
-        --p: #{$sm};
     }
 }

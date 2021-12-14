@@ -15,7 +15,7 @@ const ICON = {
 };
 
 @Element('m-' + NAME)
-export class MasterIconElement extends MasterElement {
+export class IconElement extends MasterElement {
     static override css = css;
 
    template = new Template(() => [

@@ -1,5 +1,5 @@
-@import '../../variables';
-@import '../../mixins';
+
+
 
 :host {
     --size: var(--footer-size, 3rem);
@@ -8,7 +8,6 @@
     bottom: 0;
     text-align: center;
     text-align-last: center;
-    @include bgBlur(var(--bg-raise-rgb), .8);
     border-top-right-radius: 0;
     border-top-left-radius: 0;
     flex-direction: column;

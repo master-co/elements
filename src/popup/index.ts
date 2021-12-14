@@ -1,13 +1,13 @@
 import { Element, Attr, MasterElement } from '@master/element';
 import { createPopper, Placement } from '@popperjs/core';
-import { isInteractOutside } from '../../utils/is-interact-outside';
+import { isInteractOutside } from '../utils/is-interact-outside';
 import { Template } from '@master/template';
 
 import css from './popup.scss';
-import { MasterContentElement } from '../../layout/content';
+import { ContentElement } from '../content';
 import { $ } from '@master/dom';
-import { MasterTargetElement, InteractionFactors } from '../../shared/target';
-import debounce from '../../utils/debounce';
+import { TargetElement, InteractionFactors } from '../shared/target';
+import debounce from '../utils/debounce';
 
 const $body = $(document.body);
 const innerHTML = $(document.documentElement);
@@ -15,7 +15,7 @@ const NAME = 'popup';
 const lockedPopup = new Set();
 
 @Element('m-' + NAME)
-export class MasterPopupElement extends MasterTargetElement {
+export class PopupElement extends TargetElement {
     static override css = css;
     /**
      * default
@@ -23,7 +23,7 @@ export class MasterPopupElement extends MasterTargetElement {
     _fade = true;
     _duration = 300;
 
-    content: MasterContentElement;
+    content: ContentElement;
     reference: any;
     popper;
     #resizeObserver;
@@ -74,7 +74,7 @@ export class MasterPopupElement extends MasterTargetElement {
                 'scroll-y': true,
                 guide: true,
                 part: 'content',
-                $created: (element: MasterContentElement) => this.content = element
+                $created: (element: ContentElement) => this.content = element
             }, [
                 'slot', {
                     $created: (element) => element.on('slotchange', (event) => {
@@ -150,19 +150,19 @@ export class MasterPopupElement extends MasterTargetElement {
 
         const { trigger, event, follow } = interactionFactors;
 
-        const activate = (parent?: MasterPopupElement) => {
+        const activate = (parent?: PopupElement) => {
             if (!parent) {
                 return;
             }
             if (parent.tagName === 'M-POPUP') {
                 parent.activeChildPopups.add(this);
             } else if (parent !== $body) {
-                activate(parent.parentNode as MasterPopupElement);
+                activate(parent.parentNode as PopupElement);
             }
         };
 
         if (trigger) {
-            activate(trigger.parentNode as MasterPopupElement);
+            activate(trigger.parentNode as PopupElement);
             this.updateSize(trigger.getBoundingClientRect());
         }
 
@@ -286,19 +286,19 @@ export class MasterPopupElement extends MasterTargetElement {
     }
 
     handleOnClose({ trigger, event }: InteractionFactors = {}) {
-        const deactivate = (parent?: MasterPopupElement) => {
+        const deactivate = (parent?: PopupElement) => {
             if (!parent) {
                 return;
             }
             if (parent.tagName === 'M-POPUP') {
                 parent.activeChildPopups.delete(this);
             } else if (parent !== $body) {
-                deactivate(parent.parentNode as MasterPopupElement);
+                deactivate(parent.parentNode as PopupElement);
             }
         };
 
         if (trigger) {
-            deactivate(trigger.parentNode as MasterPopupElement);
+            deactivate(trigger.parentNode as PopupElement);
         }
 
         // resolve [willLock] changed during opening

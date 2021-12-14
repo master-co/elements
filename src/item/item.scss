@@ -1,6 +1,6 @@
-@import '../../variables';
-@import '../../shared/clickable';
-@import '../../shared/clickable/style';
+
+@import '../shared/clickable';
+@import '../shared/clickable/style';
 
 :host {
     --bg-color: var(--item-bg-color, transparent);
@@ -168,5 +168,5 @@ slot[name=img]::slotted(*) {
     object-fit: cover;
     margin: calc(var(--px) / 2);
     margin-right: calc(var(--px) / -2);
-    border-radius: $xxs;
+    border-radius: .1875rem;
 }

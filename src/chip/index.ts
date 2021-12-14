@@ -1,12 +1,12 @@
 import { Element } from '@master/element';
-import { MasterClickableElement } from '../../shared/clickable';
+import { ClickableElement } from '../shared/clickable';
 import css from './chip.scss';
 
 const NAME = 'chip';
 
 
 @Element('m-' + NAME)
-export class MasterChipElement extends MasterClickableElement {
+export class ChipElement extends ClickableElement {
     static override css = css;
 
     override slotTemplateTokens = [

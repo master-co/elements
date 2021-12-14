@@ -1,23 +1,23 @@
 import { Element, MasterElement, Attr } from '@master/element';
-import { MasterSelectElement } from '../select';
+import { SelectElement } from '../select';
 
 import css from './option.scss';
 
 const NAME = 'option';
 
 @Element('m-' + NAME)
-export class MasterOptionElement extends MasterElement {
+export class OptionElement extends MasterElement {
 
     static override css = css;
 
     updating: boolean;
 
     @Attr({
-        onUpdate(option: MasterOptionElement) {
+        onUpdate(option: OptionElement) {
             if (option.slot) {
                 return;
             }
-            const select = (option.parentElement as MasterSelectElement);
+            const select = (option.parentElement as SelectElement);
             if (select.popup && !select.popup?.hidden) {
                 select.popup.render();
             }
@@ -26,7 +26,7 @@ export class MasterOptionElement extends MasterElement {
     disabled: boolean;
 
     @Attr({
-        onAssign(option: MasterOptionElement, selected, oldSelected) {
+        onAssign(option: OptionElement, selected, oldSelected) {
             // 防止無限循環更新
             if (option.select.updating || option.slot) {
                 return;
@@ -49,13 +49,13 @@ export class MasterOptionElement extends MasterElement {
     selected: boolean;
 
     @Attr({
-        onAssign(option: MasterOptionElement, value) {
+        onAssign(option: OptionElement, value) {
             if (option.slot) {
                 return;
             }
             // compose value when selected option value changed
             if (option.selected) {
-                const select = (option.parentElement as MasterSelectElement);
+                const select = (option.parentElement as SelectElement);
                 select.composeValue();
             }
             option.empty = value === null || value === undefined || value === '';
@@ -70,7 +70,7 @@ export class MasterOptionElement extends MasterElement {
     @Attr({ render: false })
     q: string;
 
-    select: MasterSelectElement;
+    select: SelectElement;
 
     override onConnected() {
         if (this.slot) {

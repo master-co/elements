@@ -1,6 +1,6 @@
-@import '../../variables';
-@import '../../mixins';
-@import '../../interactor/popup/popup.scss';
+
+
+@import '../popup/popup.scss';
 
 :host {
     --min-width: var(--popup-min-width, var(--trigger-width));

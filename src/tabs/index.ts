@@ -1,18 +1,18 @@
 import { Attr, Element, MasterElement } from '@master/element';
 import { Template } from '@master/template';
 import css from './tabs.scss';
-import { MasterButtonElement } from '../../form';
-import { MasterContentElement } from '../../layout';
-import debounce from '../../utils/debounce';
+import { ButtonElement } from '../button';
+import { ContentElement } from '../content';
+import debounce from '../utils/debounce';
 
 const TAB_BUTTON_SELECTOR = 'm-button[slot=navbar]';
 const NAME = 'tabs';
 
 @Element('m-' + NAME)
-export class MasterTabsElement extends MasterElement {
+export class TabsElement extends MasterElement {
     static override css = css;
     cue: MasterElement;
-    navbar: MasterContentElement;
+    navbar: ContentElement;
     navbarSlot: HTMLSlotElement;
     template = new Template(() => [
         'm-content', {
@@ -29,14 +29,14 @@ export class MasterTabsElement extends MasterElement {
                     this.navbarSlot = element;
                     this.#resizeObserver.observe(this.navbarSlot);
                     element.on('click', TAB_BUTTON_SELECTOR, function (event) {
-                        const button: MasterButtonElement = this;
+                        const button: ButtonElement = this;
                         tabs.activate(button.name);
                     }, { passive: true });
                 },
                 $on: {
                     slotchange: () => {
                         this.buttons = Array.from(this.children)
-                            .filter((child) => child.matches(TAB_BUTTON_SELECTOR)) as MasterButtonElement[]
+                            .filter((child) => child.matches(TAB_BUTTON_SELECTOR)) as ButtonElement[]
                         this.activate(this.value);
                     }
                 }
@@ -54,7 +54,7 @@ export class MasterTabsElement extends MasterElement {
             $on: {
                 slotchange: () => {
                     this.contents = Array.from(this.children)
-                        .filter((child) => child.tagName === 'M-CONTENT') as MasterContentElement[];
+                        .filter((child) => child.tagName === 'M-CONTENT') as ContentElement[];
                     this.update();
                 }
             }
@@ -74,10 +74,10 @@ export class MasterTabsElement extends MasterElement {
     }
 
     private update() {
-        let activeButton: MasterButtonElement;
+        let activeButton: ButtonElement;
 
         this.buttons
-            .forEach((eachButton: MasterButtonElement) => {
+            .forEach((eachButton: ButtonElement) => {
                 eachButton.active = eachButton.name === this.value;
                 if (eachButton.active) {
                     activeButton = eachButton;
@@ -85,7 +85,7 @@ export class MasterTabsElement extends MasterElement {
             });
 
         this.contents
-            .forEach((eachContent: MasterContentElement) => {
+            .forEach((eachContent: ContentElement) => {
                 eachContent.active = eachContent.name === this.value;
             });
 
@@ -126,14 +126,14 @@ export class MasterTabsElement extends MasterElement {
     }
 
     get activeButton() {
-        return this.buttons.find((eachButton: MasterButtonElement) => eachButton.name === this.value)
+        return this.buttons.find((eachButton: ButtonElement) => eachButton.name === this.value)
     }
 
-    buttons: MasterButtonElement[] = [];
-    contents: MasterContentElement[] = [];
+    buttons: ButtonElement[] = [];
+    contents: ContentElement[] = [];
 
     @Attr({
-        onUpdate(tabs: MasterTabsElement) {
+        onUpdate(tabs: TabsElement) {
             tabs.update();
         }
     })

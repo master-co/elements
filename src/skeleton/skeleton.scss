@@ -1,10 +1,10 @@
-@import '../../variables';
+
 
 :host {
     position: relative;
     contain: style;
     display: inline-flex;
-    border-radius: $xxs;
+    border-radius: .1875rem;
     width: 100%;
     pointer-events: none;
     user-select: none;

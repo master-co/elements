@@ -1,4 +1,4 @@
-@import '../../variables';
+
 
 :host([when-valid][valid][dirty]),
 :host([when-valid][valid][touched]) {
@@ -34,7 +34,7 @@
         transform: translateY(100%);
         font-size: var(--f-xxs);
         font-weight: 500;
-        border-radius: $xxs;
+        border-radius: .1875rem;
         color: var(--prompt-f-color);
         background-color: var(--prompt-bg-color);
         white-space: normal;

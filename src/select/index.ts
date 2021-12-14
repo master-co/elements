@@ -7,19 +7,19 @@ import { Template } from '@master/template';
 import css from './select.scss';
 import './select-popup';
 
-import { MasterControlElement } from '../../shared/control';
-import { MasterOptionElement } from '../option';
+import { ControlElement } from '../shared/control';
+import { OptionElement } from '../option';
 import { SelectPopupElement } from './select-popup';
-import { handleSlotEmpty } from '../../utils/handle-slot-empty';
-import debounce from '../../utils/debounce';
-import { getCleanTextContents } from '../../utils/get-clean-text-contents';
+import { handleSlotEmpty } from '../utils/handle-slot-empty';
+import debounce from '../utils/debounce';
+import { getCleanTextContents } from '../utils/get-clean-text-contents';
 
 let uid = 0;
 
 const NAME = 'select';
 
 @Element('m-' + NAME)
-export class MasterSelectElement extends MasterControlElement {
+export class SelectElement extends ControlElement {
     static override css = css;
     lightTemplate = new Template(
         () => (this.multiple ? this.value || [] : [this.value])
@@ -167,7 +167,7 @@ export class MasterSelectElement extends MasterControlElement {
             $created: (slot: HTMLSlotElement) => {
                 (slot as any).on('slotchange', () => {
                     const options = slot.assignedElements()
-                        .filter((eachChild) => eachChild.tagName === 'M-OPTION') as MasterOptionElement[];
+                        .filter((eachChild) => eachChild.tagName === 'M-OPTION') as OptionElement[];
                     if (options.length) {
                         this.#options = options;
                         this.selectOptionByValue(this.value);
@@ -182,7 +182,7 @@ export class MasterSelectElement extends MasterControlElement {
                 $created: (slot: HTMLSlotElement) => {
                     (slot as any).on('slotchange', () => {
                         const options = slot.assignedElements()
-                            .filter((eachChild) => eachChild.tagName === 'M-OPTION') as MasterOptionElement[];
+                            .filter((eachChild) => eachChild.tagName === 'M-OPTION') as OptionElement[];
                         if (options.length) {
                             this.#outputOptions = options;
                             this.render();
@@ -228,7 +228,7 @@ export class MasterSelectElement extends MasterControlElement {
     closedEmitter: EventEmitter;
 
     @Attr({
-        onUpdate(select: MasterSelectElement) {
+        onUpdate(select: SelectElement) {
             if (select.popup) {
                 select.popup.render();
             }
@@ -291,8 +291,8 @@ export class MasterSelectElement extends MasterControlElement {
         this.output.textContent = text;
     }
 
-    #options: MasterOptionElement[] = [];
-    #outputOptions: MasterOptionElement[] = [];
+    #options: OptionElement[] = [];
+    #outputOptions: OptionElement[] = [];
 
     set options(optionSettings) {
         this.#options = optionSettings?.map((optionSetting: any) => {
@@ -320,7 +320,7 @@ export class MasterSelectElement extends MasterControlElement {
         return this.#options;
     }
 
-    get selectedOptions(): MasterOptionElement[] {
+    get selectedOptions(): OptionElement[] {
         const selectedOptions = [];
         this.#options.forEach((eachOption) => {
             if (eachOption.selected) {
@@ -361,7 +361,7 @@ export class MasterSelectElement extends MasterControlElement {
     composeValue() {
         if (this.multiple) {
             this.value = this.selectedOptions
-                .map((eachOption: MasterOptionElement) => eachOption.value);
+                .map((eachOption: OptionElement) => eachOption.value);
         } else {
             this.value = this.selectedOptions[0]?.value;
         }
@@ -390,12 +390,12 @@ export class MasterSelectElement extends MasterControlElement {
     binding: string;
 
     @Attr({
-        onUpdate(select: MasterSelectElement) { select.toggleListener() }
+        onUpdate(select: SelectElement) { select.toggleListener() }
     })
     readOnly: boolean = false;
 
     @Attr({
-        onUpdate(select: MasterSelectElement) { select.toggleListener() }
+        onUpdate(select: SelectElement) { select.toggleListener() }
     })
     override disabled: boolean = false;
 
@@ -415,7 +415,7 @@ export class MasterSelectElement extends MasterControlElement {
     searchable: boolean;
 
     @Attr({
-        onUpdate(select: MasterSelectElement, value: any, oldValue: any) {
+        onUpdate(select: SelectElement, value: any, oldValue: any) {
             const isArray = Array.isArray(value);
             select.selectOptionByValue(value, true);
             select.empty = value === null || value === undefined || value === '' || isArray && !value.length;

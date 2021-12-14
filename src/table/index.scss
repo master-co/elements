@@ -1,4 +1,4 @@
-@import '../../variables.scss';
+
 @import '../../mixins.scss';
 
 m-table {
@@ -26,11 +26,11 @@ m-table {
 
     td {
         font-size: var(--f-sm);
-        padding: .875rem $sm;
+        padding: .875rem 0.625rem;
     }
 
     th {
-        padding: $sm;
+        padding: 0.625rem;
         font-weight: normal;
         font-size: var(--f-xs);
     }

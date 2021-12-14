@@ -3,7 +3,7 @@ import { Template } from '@master/template';
 import css from './card-paragraph.scss';
 
 @Element('m-' + 'card-p')
-export class MasterCardParagraphElement extends MasterElement {
+export class CardParagraphElement extends MasterElement {
     static override css = css;
    template = new Template(() => [
         'slot'

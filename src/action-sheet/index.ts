@@ -1,10 +1,10 @@
 import { $ } from '@master/dom';
 import { Element, Attr, Prop, MasterElement } from '@master/element';
 import { Template } from '@master/template';
-import { InteractionFactors } from '../../shared/target';
-import debounce from '../../utils/debounce';
-import { MasterModalElement } from '../modal';
-import { MasterPopupElement } from '../popup';
+import { InteractionFactors } from '../shared/target';
+import debounce from '../utils/debounce';
+import { ModalElement } from '../modal';
+import { PopupElement } from '../popup';
 
 import css from './action-sheet.scss';
 
@@ -13,7 +13,7 @@ const $window = $(window);
 const NAME = 'action-sheet';
 
 @Element('m-' + NAME)
-export class MasterActionSheetElement extends MasterElement {
+export class ActionSheetElement extends MasterElement {
     static override css = css;
 
     @Prop()
@@ -38,7 +38,7 @@ export class MasterActionSheetElement extends MasterElement {
     @Attr()
     interactorName: string;
 
-    interactor: MasterPopupElement | MasterModalElement;
+    interactor: PopupElement | ModalElement;
     template = new Template(() => [
         'm-' + this.interactorName, {
             $created: (element) => {

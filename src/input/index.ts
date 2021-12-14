@@ -1,21 +1,21 @@
 import { Element, Attr, Event, EventEmitter } from '@master/element';
 import css from './input.scss';
 import { Template } from '@master/template';
-import { MasterControlElement } from '../../shared/control';
+import { ControlElement } from '../shared/control';
 import { $ } from '@master/dom';
-import { displaySizeByBytes } from '../../utils/display-size-by-bytes';
-import { handleSlotEmpty } from '../../utils/handle-slot-empty';
+import { displaySizeByBytes } from '../utils/display-size-by-bytes';
+import { handleSlotEmpty } from '../utils/handle-slot-empty';
 const changeEvent = new window.Event('change', { bubbles: true, cancelable: false });
 const inputEvent = new window.Event('input', { bubbles: true, cancelable: false });
 
 const NAME = 'input';
 
 @Element('m-' + NAME)
-export class MasterInputElement extends MasterControlElement {
+export class InputElement extends ControlElement {
 
     static override css = css;
 
-    private static parseValue(input: MasterInputElement, value) {
+    private static parseValue(input: InputElement, value) {
         if (input.type === 'number') {
             if (value === '') {
                 value = null;
@@ -26,7 +26,7 @@ export class MasterInputElement extends MasterControlElement {
         return value;
     }
 
-    private static updateValue(input: MasterInputElement, value: any, oldValue: any, preventAssign?: boolean) {
+    private static updateValue(input: InputElement, value: any, oldValue: any, preventAssign?: boolean) {
         if (input.type === 'file') {
             input.empty = !value?.length || !value;
             if (!preventAssign) {
@@ -228,7 +228,7 @@ export class MasterInputElement extends MasterControlElement {
     @Attr()
     interface: string;
 
-    @Attr({ onRender: (input: MasterInputElement) => input.validate() })
+    @Attr({ onRender: (input: InputElement) => input.validate() })
     accept: string;
 
     @Attr()
@@ -247,7 +247,7 @@ export class MasterInputElement extends MasterControlElement {
     dragging: boolean = false;
 
     @Attr({
-        onUpdate(input: MasterInputElement, value, oldValue) {
+        onUpdate(input: InputElement, value, oldValue) {
             if (value === 'file') {
                 input
                     .on('click', (event) => {
@@ -300,31 +300,31 @@ export class MasterInputElement extends MasterControlElement {
     })
     type: string;
 
-    @Attr({ onRender: (input: MasterInputElement) => input.validate() })
+    @Attr({ onRender: (input: InputElement) => input.validate() })
     multiple: boolean;
 
     @Attr()
     autocomplete: string;
 
-    @Attr({ onRender: (input: MasterInputElement) => input.validate() })
+    @Attr({ onRender: (input: InputElement) => input.validate() })
     max: number;
 
-    @Attr({ onRender: (input: MasterInputElement) => input.validate() })
+    @Attr({ onRender: (input: InputElement) => input.validate() })
     min: number;
 
-    @Attr({ onRender: (input: MasterInputElement) => input.validate() })
+    @Attr({ onRender: (input: InputElement) => input.validate() })
     maxlength: number;
 
-    @Attr({ onRender: (input: MasterInputElement) => input.validate() })
+    @Attr({ onRender: (input: InputElement) => input.validate() })
     minlength: number;
 
-    @Attr({ onRender: (input: MasterInputElement) => input.validate() })
+    @Attr({ onRender: (input: InputElement) => input.validate() })
     pattern: string;
 
     @Attr()
     size: number;
 
-    @Attr({ onRender: (input: MasterInputElement) => input.validate() })
+    @Attr({ onRender: (input: InputElement) => input.validate() })
     step: number;
 
     @Attr()
@@ -337,8 +337,8 @@ export class MasterInputElement extends MasterControlElement {
     expanded: boolean;
 
     @Attr({
-        parse: MasterInputElement.parseValue,
-        onUpdate: MasterInputElement.updateValue,
+        parse: InputElement.parseValue,
+        onUpdate: InputElement.updateValue,
         render: false,
         reflect: false
     })
@@ -424,8 +424,8 @@ export class MasterInputElement extends MasterControlElement {
         this.accessor
             .on('input', (event: InputEvent) => {
                 // fix: don't set this.value to fix composition text issue
-                const value = this['_value'] = MasterInputElement.parseValue(this, (event.target as HTMLInputElement).value);
-                MasterInputElement.updateValue(this, value, this.value, true);
+                const value = this['_value'] = InputElement.parseValue(this, (event.target as HTMLInputElement).value);
+                InputElement.updateValue(this, value, this.value, true);
                 if (!this.dirty) {
                     this.dirty = true;
                 }

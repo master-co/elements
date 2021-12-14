@@ -1,21 +1,21 @@
 import { Attr, Element, Watch } from '@master/element';
-import { MasterOptionElement } from '../option';
+import { OptionElement } from '../option';
 import { Template } from '@master/template';
 
 import css from './select-popup.scss';
 import { $ } from '@master/dom';
 
-import { MasterContentElement } from '../../layout/content';
-import { MasterSelectElement } from '.';
-import { MasterItemElement } from '../../data-render/item';
-import { MasterPopupElement } from '../../interactor/popup';
-import { InteractionFactors } from '../../shared/target';
-import { getCleanTextContents } from '../../utils/get-clean-text-contents';
+import { ContentElement } from '../content';
+import { SelectElement } from '.';
+import { ItemElement } from '../item';
+import { PopupElement } from '../popup';
+import { InteractionFactors } from '../shared/target';
+import { getCleanTextContents } from '../utils/get-clean-text-contents';
 
 const NAME = 'select-popup';
 
 @Element('m-' + NAME)
-export class SelectPopupElement extends MasterPopupElement {
+export class SelectPopupElement extends PopupElement {
 
     static override css = css;
 
@@ -32,9 +32,9 @@ export class SelectPopupElement extends MasterPopupElement {
 
     override  _duration = 300;
     _triggerEvent = null;
-    items: MasterItemElement[] = [];
-    override content: MasterContentElement;
-    select: MasterSelectElement;
+    items: ItemElement[] = [];
+    override content: ContentElement;
+    select: SelectElement;
 
     override contentTokens: any = () => [
         'div', {
@@ -72,7 +72,7 @@ export class SelectPopupElement extends MasterPopupElement {
     ];
 
     override lightTemplate = new Template(() => this.select.options
-        .map((option: MasterOptionElement) => [
+        .map((option: OptionElement) => [
             'm-item', {
                 class: this.select.popupItemSize,
                 type: 'button',
@@ -83,10 +83,10 @@ export class SelectPopupElement extends MasterPopupElement {
                 $if: !this.busy,
                 $id: option,
                 innerHTML: option.innerHTML,
-                $created: (item: MasterItemElement) => {
+                $created: (item: ItemElement) => {
                     this.items.push(item);
                 },
-                $removed: (item: MasterItemElement) => {
+                $removed: (item: ItemElement) => {
                     this.items.splice(this.items.indexOf(item), 1);
                 }
             },
@@ -160,7 +160,7 @@ export class SelectPopupElement extends MasterPopupElement {
             if (this.hidden) {
                 await this.select.openPopup();
             }
-            this.items.forEach((eachItem: MasterItemElement) => {
+            this.items.forEach((eachItem: ItemElement) => {
                 const optionQ =
                     eachItem.dataset.q
                         ? eachItem.dataset.q

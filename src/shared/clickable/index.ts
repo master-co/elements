@@ -1,11 +1,11 @@
 import { MasterElement, Attr } from '@master/element';
-import { MasterControlElement } from '../control';
+import { ControlElement } from '../control';
 
 import { Template, TemplateToken } from '@master/template';
 
 const submitEvent = new window.Event('submit', { bubbles: true, cancelable: false });
 
-export class MasterClickableElement extends MasterElement {
+export class ClickableElement extends MasterElement {
     slotTemplateTokens: TemplateToken;
     master: HTMLButtonElement | HTMLAnchorElement;
     template = new Template(() => {
@@ -62,7 +62,7 @@ export class MasterClickableElement extends MasterElement {
     });
 
     @Attr({
-        onUpdate(clickable: MasterClickableElement, value: string, oldValue: string) {
+        onUpdate(clickable: ClickableElement, value: string, oldValue: string) {
             if (value === 'submit') {
                 clickable.on('click', (event) => {
                     const form: HTMLFormElement = clickable.closest('form');
@@ -72,7 +72,7 @@ export class MasterClickableElement extends MasterElement {
                         return;
                     }
                     form.querySelectorAll('m-input,m-textarea,m-select,m-check')
-                        .forEach((eachControl: MasterControlElement) => {
+                        .forEach((eachControl: ControlElement) => {
                             eachControl.dirty = true;
                             if (eachControl.invalid) {
                                 if (!firstInvalidControl) {

@@ -7,7 +7,7 @@ const NAME = 'header';
 
 
 @Element('m-' + NAME)
-export class MasterHeaderElement extends MasterElement {
+export class HeaderElement extends MasterElement {
     static override css = css;
 
     template: Template = new Template(() => [

@@ -6,7 +6,7 @@ import css from './footer.scss';
 const NAME = 'footer';
 
 @Element('m-' + NAME)
-export class MasterFooterElement extends MasterElement {
+export class FooterElement extends MasterElement {
     static override css = css;
 
     template: Template = new Template(() => [

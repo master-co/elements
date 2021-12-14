@@ -1,8 +1,8 @@
 import { Element, MasterElement, Attr, attrEnabled } from '@master/element';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
-import { MasterContentElement } from '../../layout/content';
-import { MasterHeaderElement } from '../../layout/header';
-import { MasterTargetElement, InteractionFactors } from '../../shared/target';
+import { ContentElement } from '../content';
+import { HeaderElement } from '../header';
+import { TargetElement, InteractionFactors } from '../shared/target';
 import { Template } from '@master/template';
 
 import css from './modal.scss';
@@ -12,12 +12,12 @@ const PX = 'px';
 
 
 @Element('m-' + NAME)
-export class MasterModalElement extends MasterTargetElement {
+export class ModalElement extends TargetElement {
     static override css = css;
 
     master: any;
     wrap: any;
-    header: MasterHeaderElement;
+    header: HeaderElement;
     // footer: FooterElement;
     origin: any;
 
@@ -31,7 +31,7 @@ export class MasterModalElement extends MasterTargetElement {
     closeOnScroll: boolean;
 
     @Attr({
-        onUpdate(modal: MasterModalElement, value, oldValue) {
+        onUpdate(modal: ModalElement, value, oldValue) {
             if (
                 value && oldValue ||
                 !value && oldValue
@@ -51,7 +51,7 @@ export class MasterModalElement extends MasterTargetElement {
 
     // 'static', 'close', 'none'
     @Attr({
-        onUpdate(modal: MasterModalElement, value: string, oldValue: string) {
+        onUpdate(modal: ModalElement, value: string, oldValue: string) {
             if (oldValue === 'close' || oldValue === 'none') {
                 modal.overlayElement.off({ id: [NAME] });
             }
@@ -107,7 +107,7 @@ export class MasterModalElement extends MasterTargetElement {
         { trigger, event }: InteractionFactors = {}
     ) {
         let keyframes: any;
-        let content: MasterContentElement;
+        let content: ContentElement;
         let pushing;
 
         const currentTrigger = this.lastTriggerFactors?.trigger;
@@ -118,7 +118,7 @@ export class MasterModalElement extends MasterTargetElement {
             }
 
             content = Array.from(this.children)
-                .filter((eachElement) => eachElement.matches('m-content'))[0] as MasterContentElement;
+                .filter((eachElement) => eachElement.matches('m-content'))[0] as ContentElement;
 
             if (content) {
                 content.disable();

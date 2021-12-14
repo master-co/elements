@@ -5,7 +5,7 @@ import css from './img.scss';
 const NAME = 'img';
 
 @Element('m-' + NAME)
-export class MasterImgElement extends MasterElement {
+export class ImgElement extends MasterElement {
     static override css = css;
     template = new Template(() => [
         'img', {
@@ -60,7 +60,7 @@ export class MasterImgElement extends MasterElement {
     // native
 
     @Attr({
-        onUpdate(img: MasterImgElement, value, oldValue) {
+        onUpdate(img: ImgElement, value, oldValue) {
             if (oldValue) {
                 img.complete = false;
                 img.errored = false;
@@ -70,7 +70,7 @@ export class MasterImgElement extends MasterElement {
     src: string;
 
     @Attr({
-        onUpdate(img: MasterImgElement, value, oldValue) {
+        onUpdate(img: ImgElement, value, oldValue) {
             if (oldValue) {
                 img.complete = false;
                 img.errored = false;
@@ -80,7 +80,7 @@ export class MasterImgElement extends MasterElement {
     srcset: string;
 
     @Attr({
-        onUpdate(img: MasterImgElement, value) {
+        onUpdate(img: ImgElement, value) {
             const isNaN = Number.isNaN(+value);
             if (value === undefined || value === null) {
                 img.style.removeProperty('width');
@@ -93,7 +93,7 @@ export class MasterImgElement extends MasterElement {
     width: string;
 
     @Attr({
-        onUpdate(img: MasterImgElement, value) {
+        onUpdate(img: ImgElement, value) {
             const isNaN = Number.isNaN(+value);
             if (value === undefined || value === null) {
                 img.style.removeProperty('height');
@@ -132,7 +132,7 @@ export class MasterImgElement extends MasterElement {
     errored: boolean;
 
     @Attr({
-        onUpdate(img: MasterImgElement, token) {
+        onUpdate(img: ImgElement, token) {
             if (token) {
                 const splits = token.split('x');
                 const w = splits[0];

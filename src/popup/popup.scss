@@ -1,4 +1,4 @@
-@import '../../variables';
+
 
 :host {
     --overlay-bg-color: var(--popup-overlay-bg-color, rgba(0, 0, 0, .3));
@@ -44,7 +44,7 @@
     max-height: inherit;
     backdrop-filter: blur(35px);
     -webkit-backdrop-filter: blur(35px);
-    border-radius: $xs;
+    border-radius: .3125rem;
     box-sizing: border-box;
 
     // fix safari ui

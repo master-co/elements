@@ -1,7 +1,7 @@
 import { Element, Attr } from '@master/element';
 import css from './check.scss';
 import { Template } from '@master/template';
-import { MasterControlElement } from '../../shared/control';
+import { ControlElement } from '../shared/control';
 
 const connectedChecks = new Set();
 
@@ -11,7 +11,7 @@ const NAME = 'check';
 
 
 @Element('m-' + NAME)
-export class MasterCheckElement extends MasterControlElement {
+export class CheckElement extends ControlElement {
 
     static override css = css;
 
@@ -51,7 +51,7 @@ export class MasterCheckElement extends MasterControlElement {
     role: string;
 
     @Attr({
-        onUpdate(check: MasterCheckElement, value, oldValue) {
+        onUpdate(check: CheckElement, value, oldValue) {
             if (value) {
                 let checks = nameMap[value];
                 if (!checks) checks = nameMap[value] = [];
@@ -67,7 +67,7 @@ export class MasterCheckElement extends MasterControlElement {
     override name: string;
 
     @Attr({
-        onUpdate(check: MasterCheckElement, value) {
+        onUpdate(check: CheckElement, value) {
             const parent: any = check.parentElement;
             if (parent.tagName === 'M-ITEM') {
                 parent.disabled = value;
@@ -86,21 +86,21 @@ export class MasterCheckElement extends MasterControlElement {
     interface: string = 'check';
 
     @Attr({
-        onUpdate(check: MasterCheckElement, value: any, oldValue: any) {
+        onUpdate(check: CheckElement, value: any, oldValue: any) {
             check.role = value;
         }
     })
     type: string = 'checkbox';
 
     @Attr({
-        onUpdate(check: MasterCheckElement, value: any, oldValue: any) {
+        onUpdate(check: CheckElement, value: any, oldValue: any) {
 
             check.accessor.checked = value;
             check.toggleAttribute('aria-checked', !!value);
 
             if (check.type === 'radio' && check.name && value) {
                 nameMap[check.name]
-                    .forEach((eachCheck: MasterCheckElement) => {
+                    .forEach((eachCheck: CheckElement) => {
                         if (eachCheck !== check && eachCheck.type === 'radio') {
                             eachCheck.checked = false;
                             eachCheck.validate();
@@ -116,7 +116,7 @@ export class MasterCheckElement extends MasterControlElement {
     @Attr({
         reflect: false,
         render: false,
-        onUpdate(check: MasterCheckElement, value: any, oldValue: any) {
+        onUpdate(check: CheckElement, value: any, oldValue: any) {
             if (value === oldValue) return;
             check.accessor.value = value ?? null;
         }

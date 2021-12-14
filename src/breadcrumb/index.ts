@@ -1,12 +1,12 @@
 import { Element } from '@master/element';
-import { MasterClickableElement } from '../../shared/clickable';
+import { ClickableElement } from '../shared/clickable';
 import css from './breadcrumb.scss';
 
 const NAME = 'breadcrumb';
 
 
 @Element('m-' + NAME)
-export class BreadcrumbElement extends MasterClickableElement {
+export class BreadcrumbElement extends ClickableElement {
     static override css = css;
 
     override slotTemplateTokens = [

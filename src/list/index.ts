@@ -6,7 +6,7 @@ const NAME = 'list';
 
 
 @Element('m-' + NAME)
-export class MasterListElement extends MasterElement {
+export class ListElement extends MasterElement {
     static override css = css;
     template = new Template(() => [
         'slot'

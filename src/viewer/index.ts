@@ -2,17 +2,17 @@ import { Element, } from '@master/element';
 import { Template } from '@master/template';
 
 import css from './viewer.scss';
-import { MasterModalElement } from '../modal';
+import { ModalElement } from '../modal';
 import { $ } from '@master/dom';
-import { MasterImgElement } from '../../media';
+import { ImgElement } from '../img';
 
 const NAME = 'viewer';
 const $window = $(window);
 const $document = $(document);
-const VIEWER: MasterViewerElement = $('m-viewer', {});
+const VIEWER: ViewerElement = $('m-viewer', {});
 
 @Element('m-' + NAME)
-export class MasterViewerElement extends MasterModalElement {
+export class ViewerElement extends ModalElement {
     static override css = css;
 
     _triggerEvent = '';
@@ -31,7 +31,7 @@ export class MasterViewerElement extends MasterModalElement {
         }
     ]);
 
-    img: MasterImgElement;
+    img: ImgElement;
 
     override canOpen = async () => {
         await this.updateSize();
@@ -68,7 +68,7 @@ export class MasterViewerElement extends MasterModalElement {
 
 $(document).on('click', '[toggle-viewer]', function (event) {
     // clone for performance
-    const viewer = VIEWER.cloneNode(true) as MasterViewerElement;
+    const viewer = VIEWER.cloneNode(true) as ViewerElement;
     viewer.lastTriggerFactors = { event, trigger: this };
     document.body.appendChild(viewer);
     viewer.open(viewer.lastTriggerFactors);

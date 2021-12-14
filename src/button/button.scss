@@ -1,10 +1,9 @@
-@import '../../variables';
-@import '../../shared/clickable';
-@import '../../shared/clickable/style';
-@import '../../color/color.scss';
+
+@import '../shared/clickable';
+@import '../shared/clickable/style';
 
 :host {
-    --px: var(--button-px, #{$md});
+    --px: var(--button-px, #{1.25rem});
     --py: var(--button-py, 0rem);
     --size: var(--button-size, 3rem);
     --f-size: var(--button-f-size, #{var(--f-sm)});
@@ -26,7 +25,7 @@
     line-height: 1.2;
     text-transform: uppercase;
     white-space: nowrap;
-    border-radius: $xs;
+    border-radius: .3125rem;
     align-items: center;
     justify-content: center;
 

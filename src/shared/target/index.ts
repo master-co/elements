@@ -4,10 +4,10 @@ import { $, ListenerOptions } from '@master/dom';
 
 const $body = $(document.body);
 
-export class MasterTargetElement extends MasterElement {
+export class TargetElement extends MasterElement {
 
     @Attr({
-        parse(target: MasterTargetElement, value) {
+        parse(target: TargetElement, value) {
             return (value && typeof value === 'string')
                 ? document.querySelector(value)
                 : value;
@@ -39,7 +39,7 @@ export class MasterTargetElement extends MasterElement {
 
     @Attr({
         reflect: false,
-        onUpdate(target: MasterTargetElement, value: any, oldValue: any) {
+        onUpdate(target: TargetElement, value: any, oldValue: any) {
             const name = target.constructor['elementName'];
             if (oldValue) {
                 $body.off({ id: [target, name] });

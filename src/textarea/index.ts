@@ -1,14 +1,14 @@
 import { Element, Attr } from '@master/element';
 import { Template } from '@master/template';
-import { MasterControlElement } from '../../shared/control';
-import { handleSlotEmpty } from '../../utils/handle-slot-empty';
+import { ControlElement } from '../shared/control';
+import { handleSlotEmpty } from '../utils/handle-slot-empty';
 
 import css from './textarea.scss';
 
 const NAME = 'textarea';
 
 @Element('m-' + NAME)
-export class MasterTextareaElement extends MasterControlElement {
+export class TextareaElement extends ControlElement {
     static override css = css;
     lightTemplate = new Template(() => [
         'textarea', {
@@ -69,7 +69,7 @@ export class MasterTextareaElement extends MasterControlElement {
     keepValidity: boolean;
 
     @Attr({
-        onUpdate(input: MasterTextareaElement, value) {
+        onUpdate(input: TextareaElement, value) {
             const tabIndex = input.tabIndex;
 
             if (value) {
@@ -96,7 +96,7 @@ export class MasterTextareaElement extends MasterControlElement {
     @Attr({
         reflect: false,
         render: false,
-        onUpdate(textarea: MasterTextareaElement, value: any) {
+        onUpdate(textarea: TextareaElement, value: any) {
             textarea.empty = value === null || value === undefined || value === '';
             textarea.accessor.value = value ?? null;
             textarea.validate();
@@ -104,10 +104,10 @@ export class MasterTextareaElement extends MasterControlElement {
     })
     value: any;
 
-    @Attr({ onRender: (textarea: MasterTextareaElement) => textarea.validate() })
+    @Attr({ onRender: (textarea: TextareaElement) => textarea.validate() })
     maxlength: number;
 
-    @Attr({ onRender: (textarea: MasterTextareaElement) => textarea.validate() })
+    @Attr({ onRender: (textarea: TextareaElement) => textarea.validate() })
     minlength: number;
 
     @Attr()

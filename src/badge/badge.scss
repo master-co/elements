@@ -1,5 +1,4 @@
-@import '../../variables.scss';
-@import '../../color/color.scss';
+
 
 :host {
     --f-color: var(--badge-f-color, var(--f-theme));
@@ -14,7 +13,7 @@
     justify-content: center;
     font-size: var(--f-size);
     font-weight: 500;
-    margin: $xxs;
+    margin: .1875rem;
     padding: 0 .25rem;
     border-radius: 100rem;
     letter-spacing: 0;

@@ -1,12 +1,12 @@
 import { Element, Attr, Prop, attrEnabled, MasterElement } from '@master/element';
-import { MasterModalElement } from '../modal';
+import { ModalElement } from '../modal';
 import './dialog-foot';
 import css from './dialog.scss';
 import { Template } from '@master/template';
 import { $ } from '@master/dom';
 
 const NAME = 'dialog';
-const parserObject = (dialog: MasterDialogElement, value, oldValue) => {
+const parserObject = (dialog: DialogElement, value, oldValue) => {
     if (oldValue) {
         return Object.assign({}, oldValue, value);
     } else {
@@ -21,7 +21,7 @@ enum TYPE_ICON {
 
 
 @Element('m-' + NAME)
-export class MasterDialogElement extends MasterModalElement {
+export class DialogElement extends ModalElement {
     static override css = css;
 
     override lightTemplate = new Template(() => [
@@ -227,7 +227,7 @@ export class MasterDialogElement extends MasterModalElement {
 const PURE_DIALOG = $('m-dialog', { hidden: true });
 
 export function dialog(options: any) {
-    const dialog = (PURE_DIALOG.cloneNode() as MasterDialogElement);
+    const dialog = (PURE_DIALOG.cloneNode() as DialogElement);
     Object.assign(dialog, options);
     document.body.appendChild(dialog);
     dialog.open();

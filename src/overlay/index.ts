@@ -5,7 +5,7 @@ import css from './overlay.scss';
 const NAME = 'overlay';
 
 @Element('m-' + NAME)
-export class MasterSkeletonOverlay extends MasterElement {
+export class SkeletonOverlay extends MasterElement {
     static override css = css;
     template = new Template(() => ['slot']);
 

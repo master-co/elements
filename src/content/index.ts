@@ -1,10 +1,10 @@
 import { Element, MasterElement, Attr, Event, EventEmitter, Watch } from '@master/element';
 import { Template } from '@master/template';
 import { $ } from '@master/dom';
-import { MasterTargetElement } from '../../shared/target';
+import { TargetElement } from '../shared/target';
 import css from './content.scss';
-import isNum from '../../utils/is-num';
-import debounce from '../../utils/debounce';
+import isNum from '../utils/is-num';
+import debounce from '../utils/debounce';
 
 const NAME = 'content';
 const PX = 'px';
@@ -29,7 +29,7 @@ const
 
 
 @Element('m-' + NAME)
-export class MasterContentElement extends MasterTargetElement {
+export class ContentElement extends TargetElement {
     static override css = css;
 
     #time: any = {};

@@ -1,6 +1,6 @@
-@import '../../variables';
-@import '../../shared/clickable';
-@import '../../shared/clickable/style';
+
+@import '../shared/clickable';
+@import '../shared/clickable/style';
 
 :host {
     --b-width: var(--card-b-width, 1px);
@@ -13,7 +13,7 @@
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    border-radius: $xs;
+    border-radius: .3125rem;
 }
 
 ::slotted(m-content) {

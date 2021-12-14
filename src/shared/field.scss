@@ -1,4 +1,4 @@
-@import '../../variables';
+
 @import './normalize';
 
 /**
@@ -16,7 +16,7 @@
     display: inline-flex;
     align-items: flex-start;
     line-height: 1.2;
-    border-radius: $xs;
+    border-radius: .3125rem;
     max-width: 100%;
     -webkit-user-drag: none;
     // ~m-icon {

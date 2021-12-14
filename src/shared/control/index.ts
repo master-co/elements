@@ -1,9 +1,9 @@
 import { MasterElement, Attr } from '@master/element';
 import { capitalize } from '../../utils/capitalize';
 
-const WHEN_ATTR_OPTIONS = { reflect: false, onUpdate: (control: MasterControlElement) => control.validate() };
+const WHEN_ATTR_OPTIONS = { reflect: false, onUpdate: (control: ControlElement) => control.validate() };
 
-export class MasterControlElement extends MasterElement {
+export class ControlElement extends MasterElement {
 
     validity: ValidityState;
 
@@ -54,7 +54,7 @@ export class MasterControlElement extends MasterElement {
     @Attr(WHEN_ATTR_OPTIONS)
     error: string;
 
-    @Attr({ onRender: (control: MasterControlElement) => control.validate() })
+    @Attr({ onRender: (control: ControlElement) => control.validate() })
     required: boolean;
 
     @Attr({ observe: false, render: false })
