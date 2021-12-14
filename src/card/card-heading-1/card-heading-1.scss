@@ -1,0 +1,17 @@
+:host {
+    display: block;
+    font-size: var(--f-md);
+    line-height: 1.2;
+    margin: .375rem 0;
+    color: var(--f-theme);
+    font-weight: 600;
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+
+:host(:first-child) {
+    margin-top: 0;
+}
+
+:host(:last-child) {
+    margin-bottom: 0;
+}

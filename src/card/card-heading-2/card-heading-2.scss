@@ -1,0 +1,15 @@
+:host {
+    display: block;
+    font-size: var(--f-sm);
+    font-weight: 400;
+    color: var(--f-theme-fader);
+    margin: .375rem 0;
+}
+
+:host(:first-child) {
+    margin-top: 0;
+}
+
+:host(:last-child) {
+    margin-bottom: 0;
+}

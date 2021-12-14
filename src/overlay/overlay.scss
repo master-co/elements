@@ -1,0 +1,11 @@
+:host {
+    --bg-color: var(--overlay-bg-color, rgba(0, 0, 0, .5));
+    position: absolute;
+    contain: content;
+    height: 125%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    background-color: var(--bg-color);
+}

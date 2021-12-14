@@ -1,0 +1,50 @@
+:host(.filled) {
+    [part=master] {
+        background-color: var(--bg-color);
+    }
+}
+
+:host(.filled[disabled]) {
+    [part=master] {
+        background-color: var(--bg-color-disabled) !important;
+    }
+}
+
+:host(.filled\@active[active]) {
+    [part=master] {
+        background-color: var(--bg-color-hover);
+    }
+}
+
+:host(.outlined) {
+    [part=master] {
+        border-width: var(--b-width, 1px);
+    }
+}
+
+:host([active]) {
+    [part=master] {
+        color: var(--f-color-active);
+    }
+}
+
+@media (any-hover: hover) {
+
+    :host(:not([disabled])) {
+
+        a[part=master]:hover,
+        button[part=master]:hover {
+            background-color: var(--bg-color-hover);
+        }
+    }
+
+    :host(.outlined:not([disabled])) {
+
+        a[part=master]:hover,
+        button[part=master]:hover {
+            --b-color: var(--b-color-active);
+            color: var(--f-color-hover);
+            box-shadow: inset 0 0 0 1px var(--b-color-active);
+        }
+    }
+}

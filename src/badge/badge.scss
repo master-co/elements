@@ -1,0 +1,45 @@
+@import '../../variables.scss';
+@import '../../color/color.scss';
+
+:host {
+    --f-color: var(--badge-f-color, var(--f-theme));
+    --f-size: var(--badge-f-size, var(--f-xxs));
+    --bg-color: var(--badge-bg-color, transparent);
+    --b-color: var(--badge-b-color, var(--b-fader));
+    --b-width: var(--badge-b-width, 1px);
+    --b-style: var(--badge-b-style, solid);
+    color: var(--f-color);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--f-size);
+    font-weight: 500;
+    margin: $xxs;
+    padding: 0 .25rem;
+    border-radius: 100rem;
+    letter-spacing: 0;
+    height: 1.25rem;
+    min-width: 1.25rem;
+    user-select: none;
+    white-space: nowrap;
+    contain: style;
+    flex: 0 0 auto;
+    background-color: var(--bg-color);
+}
+
+:host(.sm) {
+    --badge-f-size: .625rem;
+    height: .875rem;
+    min-width: .875rem;
+}
+
+:host(.lg) {
+    height: 1.5rem;
+    min-width: 1.5rem;
+}
+
+:host(.outlined) {
+    border-width: var(--b-width);
+    border-color: var(--b-color);
+    border-style: var(--b-style);
+}

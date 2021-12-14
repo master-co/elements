@@ -1,0 +1,33 @@
+m-modal::part(master) {
+    padding: 1rem;
+}
+
+:host([interactor-name=modal]) {
+    m-header {
+        --side-min-width: 3rem;
+        background-color: rgba(var(--bg-body-rgb), 0.8);
+        border-bottom: 1px solid var(--b-fadest);
+    }
+
+    m-header::part(master) {
+        font-size: var(--f-xs);
+        font-weight: 500;
+    }
+
+    m-content {
+        --offset-top: 3rem;
+    }
+
+    ::slotted(m-item:first-of-type) {
+        border-top-left-radius: .375rem;
+        border-top-right-radius: .375rem;
+    }
+
+    ::slotted(m-item:last-of-type) {
+        border-bottom-left-radius: .375rem;
+        border-bottom-right-radius: .375rem;
+    }
+}
+
+:host([interactor-name=popup]) {
+}

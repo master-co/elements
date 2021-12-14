@@ -1,4 +1,31 @@
+::slotted(input),
+::slotted(textarea),
+input,
+textarea {
+    cursor: text;
+    border: 0;
+    font-weight: inherit;
+    color: inherit;
+    -webkit-appearance: none;
+    white-space: nowrap;
+    font-family: inherit;
+    font-size: inherit;
+    text-align: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+    -webkit-text-fill-color: unset; // fix safari opacity problem
+    outline: none;
+    background-color: transparent;
+    -webkit-user-drag: none;
+    user-select: text;
+    -webkit-user-select: text;
+    touch-action: manipulation;
+    -webkit-touch-action: manipulation;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+}
 
+::slotted(:-webkit-autofill),
 :-webkit-autofill {
     transition: background-color 5000s ease-in-out 0s;
     border-style: dashed !important;
@@ -32,20 +59,4 @@
 :-moz-read-only {
     cursor: default;
     caret-color: transparent;
-}
-
-[toggle-viewer] {
-    cursor: zoom-in;
-}
-
-.locked-by-popup {
-    pointer-events: none !important;
-}
-
-.unlocked-by-popup {
-    pointer-events: auto !important;
-}
-
-nav[aria-label="breadcrumb"] {
-    display: flex;
 }

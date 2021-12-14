@@ -1,0 +1,54 @@
+@import '../../variables';
+@import '../../mixins';
+
+:host {
+    --size: var(--footer-size, 3rem);
+    --side-min-width: var(--footer-side-min-width, 0);
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+    text-align-last: center;
+    @include bgBlur(var(--bg-raise-rgb), .8);
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    flex-direction: column;
+}
+
+:host,
+[part=body],
+slot[name=start],
+slot[name=end] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+[part=body] {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+:host(.safe) {
+    [part=master] {
+        padding-bottom: unquote('env(safe-area-inset-bottom)');
+    }
+}
+
+[part=master] {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    min-height: var(--size);
+}
+
+slot[name=end],
+slot[name=start] {
+    min-width: var(--side-min-width);
+    flex: 0 0 auto;
+}
+
+::slotted(h2) {
+    font-size: var(--f-sm) !important;
+    margin: 0 !important;
+}

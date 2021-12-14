@@ -1,0 +1,200 @@
+@import '../../variables';
+
+:host {
+    --offset-top: var(--content-offset-top, 0px);
+    --offset-bottom: var(--content-offset-bottom, 0px);
+    --offset-left: var(--content-offset-left, 0px);
+    --offset-right: var(--content-offset-right, 0px);
+    --padding: var(--content-padding, 0px);
+    --bar-p: var(--content-bar-p, 4px);
+    position: relative;
+    contain: style;
+    width: 100%;
+    max-height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
+    -ms-overflow-style: none;
+    box-sizing: border-box;
+}
+
+[part=master] {
+    display: flex; // use flex to fix content padding issue
+    box-sizing: border-box;
+    width: 100%;
+    max-height: inherit;
+    contain: style;
+    padding: var(--offset-top) var(--offset-right) var(--offset-bottom) var(--offset-left);
+}
+
+slot[name=part] {
+    display: block;
+    width: 100%;
+}
+
+[part=content] {
+    position: relative;
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    min-width: 0;
+    flex: 1 1 auto;
+    padding: var(--padding);
+}
+
+:host([changing]) {
+    overflow: hidden !important;
+    contain: style;
+}
+
+:host([collapse-x]) {
+    min-width: 0 !important;
+    will-change: width, opacity;
+}
+
+:host([collapse-y]) {
+    min-height: 0 !important;
+    will-change: height, opacity;
+}
+
+:host([collapse-x][collapse-y]) {
+    min-height: 0 !important;
+    min-width: 0 !important;
+    will-change: height, width, opacity;
+}
+
+:host([scroll-y]),
+:host([scroll-x]) {
+    [part=master] {
+        will-change: scroll-position, -webkit-mask-image;
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+}
+
+:host([scroll-x]) {
+    [part=master] {
+        overflow-y: hidden;
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        touch-action: pan-x;
+    }
+
+    // .scrollItems {
+    //     flex-wrap: nowrap;
+    //     padding-right: inherit;
+    // }
+
+    // .scroll-item {
+    //     &:last-child {
+    //         padding-right: 0;
+    //     }
+    // }
+
+    // &[snap=true] {
+    //     scroll-snap-type: mandatory;
+
+    //     .scroll-item {
+    //         scroll-snap-align: center;
+    //     }
+    // }
+}
+
+:host([scroll-y]) {
+
+    [part=master] {
+        overflow-y: auto;
+        overflow-x: hidden;
+        overscroll-behavior-y: contain;
+        touch-action: pan-y;
+    }
+
+    [part=content] {
+        height: fit-content;
+    }
+
+    // .scrollItems {
+    //     flex-direction: column;
+    // }
+
+    // &[snap=true] {
+    //     scroll-snap-type: mandatory;
+
+    //     .scroll-item {
+    //         scroll-snap-align: center;
+    //     }
+    // }
+}
+
+:host([scroll-x][scroll-y]) {
+    [part=master] {
+        overflow: auto;
+        touch-action: manipulation;
+    }
+}
+
+
+:host([overscroll]) {
+    overscroll-behavior: auto auto;
+}
+
+[part=scrollbar-x],
+[part=scrollbar-y] {
+    position: absolute;
+    display: block;
+    z-index: 1000;
+    pointer-events: none !important;
+    box-sizing: border-box;
+    contain: content;
+    opacity: 1;
+    padding: var(--bar-p);
+
+    &[hidden] {
+        opacity: 0;
+        transition: opacity .2s ease-out .5s;
+        will-change: opacity;
+    }
+}
+
+m-thumb {
+    position: relative;
+    display: block;
+    border-radius: 2px;
+    box-sizing: border-box;
+    background-color: var(--f-fadest);
+    contain: strict;
+    will-change: transform;
+    opacity: .5;
+
+    // &:hover {
+    //     width: 6px;
+    //     border-radius: 3px;
+    //     background-color: rgba(0, 0, 0, .2);
+    // }
+}
+
+[part=scrollbar-x] {
+    bottom: 0;
+    left: var(--offset-left);
+    width: calc(100% - var(--offset-left) - var(--offset-right));
+
+    m-thumb {
+        height: 4px;
+    }
+}
+
+[part=scrollbar-y] {
+    top: var(--offset-top);
+    right: 0;
+    height: calc(100% - var(--offset-top) - var(--offset-bottom));
+
+    m-thumb {
+        width: 4px;
+    }
+}

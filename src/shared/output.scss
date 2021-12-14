@@ -1,0 +1,88 @@
+:host {
+    --output-item-margin: .125rem;
+}
+
+[part=body] {
+    padding: var(--py) var(--px);
+    flex: 1 1 auto;
+    width: 100%;
+    box-sizing: border-box;
+    min-width: 0;
+}
+
+slot[name=output] {
+    display: flex;
+    max-width: 100%;
+    flex-wrap: wrap;
+    flex: 1 1 auto;
+    width: auto;
+    min-width: -webkit-fill-available;
+    margin: -.28125rem -.375rem;
+}
+
+::slotted(m-chip[slot=output]) {
+    flex: 0 0 auto;
+    margin: var(--output-item-margin) var(--output-item-margin);
+}
+
+::slotted([role=output]) {
+    max-width: fit-content;
+    display: inline-flex;
+    flex: 1 1 auto;
+    padding: 0;
+    margin: .28125rem .375rem;
+    white-space: nowrap;
+}
+
+:host(.underlined) {
+
+    slot[name=output] {
+        margin-left: calc(var(--output-item-margin) * -1);
+        margin-right: calc(var(--output-item-margin) * -1);
+    }
+
+    ::slotted([role=output]),
+    ::slotted(m-chip[slot=output]) {
+        margin-right: var(--output-item-margin);
+        margin-left: var(--output-item-margin);
+    }
+
+    ::slotted(m-chip[slot=output]:last-of-type) {
+        margin-right: .375rem;
+    }
+
+    ::slotted(m-chip[slot=output]) {
+        &:last-of-type {
+            margin-right: .375rem;
+        }
+    }
+
+    [part=icon] {
+        margin-left: .375rem;
+    }
+}
+
+::slotted(m-img) {
+    height: calc(var(--size) * 0.5);
+    width: calc(var(--size) * 0.5);
+    object-fit: contain;
+    margin-right: .25rem;
+}
+
+::slotted([role="output"][contenteditable]) {
+    outline: none;
+    -webkit-user-modify: read-write-plaintext-only;
+    user-select: text;
+    cursor: text;
+}
+
+::slotted([role="output"][aria-placeholder]:empty:before) {
+    content: attr(aria-placeholder);
+    color: var(--f-fadest);
+}
+
+:host([busy]) {
+    [part=body] {
+        visibility: hidden;
+    }
+}

@@ -1,0 +1,15 @@
+:host {
+    display: block;
+    font-size: var(--f-xs);
+    line-height: 1.4;
+    margin: .25rem 0;
+    color: var(--f-fade);
+}
+
+:host(:first-child) {
+    margin-top: 0;
+}
+
+:host(:last-child) {
+    margin-bottom: 0;
+}

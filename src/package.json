@@ -1,0 +1,31 @@
+{
+    "name": "@master/elements",
+    "license": "MIT",
+    "description": "Functional and flexible UI elements",
+    "author": "Aoyue Design LTD.",
+    "funding": "https://opencollective.com/master-style",
+    "main": "index.js",
+    "types": "index.d.ts",
+    "private": false,
+    "keywords": [
+        "element",
+        "style",
+        "button",
+        "card",
+        "dialog",
+        "modal",
+        "custom-elements",
+        "web-components"
+    ],
+    "peerDependencies": {
+        "@master/dom": "^1.0.0",
+        "@master/element": "^1.0.0",
+        "@master/template": "^1.0.0",
+        "@popperjs/core": "^2.0.0",
+        "body-scroll-lock": "^3.1.5"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/master-style/style.git"
+    }
+}

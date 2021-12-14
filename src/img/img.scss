@@ -1,0 +1,105 @@
+:host {
+    --b-color-errored: var(--img-b-color-errored, var(--b-fader));
+    position: relative;
+    display: flex;
+    object-fit: cover;
+    width: max-content;
+}
+
+[part=master] {
+    display: block;
+    border-radius: inherit;
+    object-fit: inherit;
+    object-position: inherit;
+    user-select: none;
+    -webkit-user-drag: none;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+[part=skeleton] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+}
+
+:host([ratio]) {
+    width: 100%;
+
+    [part=master] {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+    }
+
+    &:after {
+        contain: strict;
+        content: '';
+        display: inline-block;
+        vertical-align: middle;
+        padding-bottom: var(--ratio);
+    }
+}
+
+:host([fade][complete]) {
+    [part=master] {
+        will-change: opacity;
+        transition: opacity .3s ease;
+    }
+}
+
+:host(:not([complete]):not([errored])) {
+    [part=master] {
+        opacity: 0;
+    }
+}
+
+:host([src=""]),
+:host([srcset=""]) {
+    [part=master] {
+        visibility: hidden;
+    }
+}
+
+:host([width]) {
+    [part=master] {
+        width: inherit;
+    }
+}
+
+:host([height]) {
+    [part=master] {
+        height: inherit;
+    }
+}
+
+:host([errored]) {
+    background-color: rgba(var(--f-theme-rgb), .05);
+}
+
+:host([errored]) {
+    [part=master] {
+        visibility: hidden;
+    }
+}
+
+slot[name=error] {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--f-xs);
+    border: 1px solid var(--b-color-errored);
+    background:
+        linear-gradient(to top right, transparent calc(50% - 1px), var(--b-color-errored), transparent calc(50% + 1px)),
+        linear-gradient(to top left, transparent calc(50% - 1px), var(--b-color-errored), transparent calc(50% + 1px));
+    background-origin: border-box;
+}

@@ -1,0 +1,15 @@
+@import '../modal/modal.scss';
+
+:host {
+    --r: 0;
+    --p: 0;
+    --max-width: none;
+    cursor: zoom-out;
+}
+
+[part=master] {
+    height: fit-content;
+    width: fit-content;
+    max-width: 100%;
+    max-height: 100%;
+}

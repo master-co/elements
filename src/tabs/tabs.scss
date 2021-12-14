@@ -1,0 +1,65 @@
+@import '../../variables';
+
+:host {
+    --cue-color: var(--tabs-cue-color, var(--f-theme));
+    --navbar-spacing: var(--tabs-navbar-spacing, .625rem);
+}
+
+[part=navbar] {
+    position: relative;
+    z-index: 1;
+    margin-bottom: -1px;
+
+    &::part(content) {
+        display: flex;
+        min-width: auto;
+        margin-bottom: 1px;
+        padding: 0 var(--navbar-spacing);
+    }
+
+    &:after {
+        content: '';
+        position: absolute;
+        bottom: 2px;
+        height: 1px;
+        width: 100%;
+        box-shadow: 0 1px 0px 0px var(--b-fadest);
+    }
+}
+
+slot[name=navbar] {
+    &::slotted(m-button) {
+        --f-color: var(--f-fade);
+        --f-color-hover: var(--f-theme);
+        --f-color-active: var(--f-theme);
+        --bg-color-hover: transparent;
+        --px: var(--navbar-spacing);
+        border-radius: 0;
+        text-transform: none;
+    }
+}
+
+::slotted(m-content) {
+    position: relative;
+}
+
+::slotted(m-content:not([active])) {
+    display: none;
+}
+
+[part=cue] {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    border-radius: 1.5px;
+    background-color: var(--cue-color);
+
+    &.animatable {
+        will-change: width, transform;
+        transition-property: width, transform;
+        transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+        transition-duration: .2s;
+    }
+}

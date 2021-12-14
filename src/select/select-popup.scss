@@ -1,0 +1,57 @@
+@import '../../variables';
+@import '../../mixins';
+@import '../../interactor/popup/popup.scss';
+
+:host {
+    --min-width: var(--popup-min-width, var(--trigger-width));
+}
+
+:host([searching]) {
+    ::slotted(m-item:not([found])) {
+        display: none;
+    }
+}
+
+[part=master] {
+    z-index: 9999;
+}
+
+[part=search-info] {
+    font-size: var(--f-xxs);
+    padding: .5rem 1.25rem;
+    font-style: italic;
+    text-align: center;
+    letter-spacing: 1px;
+    color: var(--f-fade);
+}
+
+[part=content] {
+    max-height: inherit;
+}
+
+[part=querying] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .5rem 1.25rem;
+}
+
+::slotted(m-item.xs),
+::slotted(m-item.sm),
+::slotted(m-item) {
+    --f-size: 1rem;
+}
+
+::slotted(m-item[selected]) {
+    font-weight: 600;
+    background-color: var(--item-bg-color-hover, var(--bg-overlay));
+}
+
+::slotted(m-item[empty]) {
+    color: var(--f-fade);
+    font-weight: normal;
+}
+
+::slotted(m-item.xs) {
+    --py: 0.375rem;
+}

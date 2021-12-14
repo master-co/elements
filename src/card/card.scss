@@ -1,0 +1,93 @@
+@import '../../variables';
+@import '../../shared/clickable';
+@import '../../shared/clickable/style';
+
+:host {
+    --b-width: var(--card-b-width, 1px);
+    --b-style: var(--card-b-style, solid);
+    --b-color: var(--card-b-color, var(--b-fader));
+    --b-color-active: var(--card-b-color-active, var(--b-fade));
+    --bg-color: var(--card-bg-color, var(--bg-object));
+    --bg-color-hover: var(--card-bg-color-hover, var(--bg-object-hover));
+    --bg-color-disabled: var(--card-bg-color-disabled, var(--bg-color));
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    border-radius: $xs;
+}
+
+::slotted(m-content) {
+    --padding: 1rem;
+    flex: 1 1 auto;
+}
+
+::slotted(m-content[slot=end]) {
+    --padding: 0 1rem 1rem 1rem;
+}
+
+slot[name=start],
+slot[name=end],
+slot[name=overlay] {
+    display: contents;
+}
+
+[part=master] {
+    overflow: hidden;
+}
+
+:host(.raised) {
+    border: 0;
+    box-shadow: var(--object-shadow);
+}
+
+:host(.raised[disabled]) {
+    [part=master] {
+        box-shadow: none !important;
+    }
+}
+
+:host([disabled]) {
+    box-shadow: none;
+
+    ::slotted(*:not([slot=overlay])) {
+        pointer-events: none !important;
+        opacity: .5 !important;
+    }
+}
+
+[part=content] {
+    display: block;
+    box-sizing: border-box;
+    padding: var(--content-padding);
+    width: 100%;
+    flex: 1 1 auto;
+}
+
+slot[name=end] {
+    &::slotted(m-button) {
+        border-radius: 0;
+        border-top: 1px solid var(--b-fadest);
+    }
+}
+
+:host(.body\/foot\+head) {
+    [part=master] {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        grid-template-rows: 1fr auto;
+        grid-template-areas:
+            "body head"
+            "foot head"
+    }
+}
+
+:host(.head\+body\/foot) {
+    [part=master] {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        grid-template-rows: 1fr auto;
+        grid-template-areas:
+            "head body"
+            "head foot"
+    }
+}

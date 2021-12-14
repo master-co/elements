@@ -1,0 +1,132 @@
+@import '../../variables';
+@import '../../shared/clickable';
+@import '../../shared/clickable/style';
+@import '../../color/color.scss';
+
+:host {
+    --f-size: var(--chip-f-size, .8125rem);
+    --f-color: var(--chip-f-color, var(--f-theme));
+    --b-color-active: var(--chip-b-color-active);
+    --b-width: var(--chip-b-width, 1px);
+    --b-style: var(--chip-b-style, solid);
+    --b-color: var(--chip-b-color, var(--b-fader));
+    --bg-color: var(--chip-bg-color, transparent);
+    --bg-color-hover: var(--chip-bg-color-hover, var(--bg-overlay));
+    --bg-color-head: var(--chip-bg-color-head, transparent);
+    --bg-color-disabled: var(--chip-bg-color-disabled, transparent);
+    --radius: var(--chip-radius, #{$xs});
+    --size: var(--chip-size, 2rem);
+    --p: var(--chip-p, .25rem);
+    --px: var(--chip-px, .625rem);
+    --mx: calc(var(--p) - var(--px));
+    display: inline-flex;
+    border-radius: var(--radius);
+    color: var(--f-color);
+    max-width: 100%;
+}
+
+[part=master] {
+    padding: var(--p) var(--px);
+    white-space: nowrap;
+    font-weight: 400;
+    font-size: var(--f-size);
+    vertical-align: middle;
+    overflow: hidden;
+    line-height: 1.2;
+    height: var(--size);
+    user-select: none;
+    contain: style;
+    align-items: center;
+}
+
+slot {
+    border-radius: inherit;
+}
+
+:host(.rounded) {
+    ::slotted(*) {
+        border-radius: 99999em;
+    }
+}
+
+:host(.outlined) {
+    slot[name=start] {
+        &::slotted(*) {
+            margin: 0 .375rem 0 calc(var(--mx) - 1px);
+        }
+    }
+}
+
+:host(.sm) {
+    --chip-size: 1.5rem;
+    --chip-px: .4375rem;
+    --chip-f-size: var(--f-xxs);
+
+    slot[name=start] {
+        &::slotted(*) {
+            font-size: .625rem;
+            padding: 0 .25rem;
+        }
+    }
+
+    ::slotted(.close-button) {
+        --size: .875rem;
+        font-size: .625rem;
+        margin-right: -.125rem;
+    }
+}
+
+::slotted(.close-button) {
+    --size: 1.125rem;
+    --px: 0px;
+    --f-size: var(--f-xxs);
+    width: var(--size);
+    border-radius: calc(var(--radius) / 2);
+    margin-right: -.1875rem;
+    margin-left: .375rem;
+}
+
+slot[name=start],
+slot[name=end] {
+    &::slotted(*) {
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+        justify-content: center;
+        border-radius: calc(var(--radius) / 2);
+        height: calc(var(--size) - var(--p) * 2);
+    }
+}
+
+slot[name=start] {
+    &::slotted(*) {
+        letter-spacing: 0;
+        font-weight: 600;
+        text-transform: uppercase;
+        background-color: var(--bg-color-head);
+        padding: 0 $xs;
+        min-width: calc(var(--size) - var(--p) * 2);
+        margin: 0 .375rem 0 var(--mx);
+    }
+}
+
+slot[name=end] {
+    &::slotted(*) {
+        margin-left: .375rem;
+        color: var(--f-fade);
+    }
+}
+
+::slotted(m-img) {
+    padding: 0 !important;
+    background-color: transparent !important;
+}
+
+:host([disabled]) {
+    slot[name=start] {
+        &::slotted(*) {
+            color: inherit !important;
+            background-color: var(--b-fadest) !important;
+        }
+    }
+}
