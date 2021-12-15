@@ -7,7 +7,6 @@ import css from './popup.scss';
 import { ContentElement } from '../content';
 import { $ } from '@master/dom';
 import { TargetElement, InteractionFactors } from '../shared/target';
-import debounce from '../utils/debounce';
 
 const $body = $(document.body);
 const innerHTML = $(document.documentElement);
