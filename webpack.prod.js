@@ -53,7 +53,7 @@ module.exports = {
     output: {
         clean: true,
         library: {
-            name: '@master/package',
+            name: '@master/elements',
             type: 'umd',
         },
         globalObject: 'self'
