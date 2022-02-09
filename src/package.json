@@ -2,7 +2,7 @@
     "name": "@master/elements",
     "license": "MIT",
     "description": "Functional and flexible UI elements",
-    "author": "Aoyue Design LTD.",
+    "author": "Aoyue Design LLC.",
     "funding": "https://opencollective.com/master-co",
     "main": "index.js",
     "types": "index.d.ts",
