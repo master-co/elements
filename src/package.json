@@ -18,9 +18,9 @@
         "web-components"
     ],
     "peerDependencies": {
-        "@master/dom": "^1.0.0-alpha",
-        "@master/element": "^1.0.0-alpha",
-        "@master/template": "^1.0.0-alpha",
+        "@master/dom": "^1.0.0-alpha.4",
+        "@master/element": "^1.0.0-alpha.7",
+        "@master/template": "^1.0.0-alpha.35",
         "@popperjs/core": "^2.0.0",
         "body-scroll-lock": "^3.1.5"
     },
