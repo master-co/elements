@@ -22,7 +22,7 @@
         "babel-loader": "^8.2.3",
         "copy-webpack-plugin": "^10.0.0",
         "css-loader": "^6.5.1",
-        "globby": "^11.0.4",
+        "glob": "^7.2.0",
         "mini-css-extract-plugin": "^2.4.5",
         "postcss-loader": "^6.2.1",
         "sass": "^1.44.0",
