@@ -10,7 +10,7 @@ export class ControlElement extends MasterElement {
     accessor;
 
     @Attr()
-    autofocus: boolean;
+    override autofocus: boolean;
 
     @Attr({ render: false })
     override emit: boolean;

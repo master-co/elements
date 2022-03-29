@@ -1,6 +1,6 @@
 import { Element, Attr, MasterElement } from '@master/element';
 import { createPopper, Placement } from '@popperjs/core';
-import { isInteractOutside } from '../utils/is-interact-outside';
+import { isInteractOutside } from '../../../docs/src/app/utils/is-interact-outside';
 import { Template } from '@master/template';
 
 import css from './popup.scss';

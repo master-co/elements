@@ -1,4 +1,3 @@
-
 @import './normalize';
 
 /**
@@ -262,7 +261,7 @@ slot[name=end],
     min-height: var(--size);
 }
 
-::slotted([role=accessor]) {
+::slotted([role=accessor]:not([hidden])) {
     z-index: 1;
     display: flex;
     text-overflow: ellipsis;
